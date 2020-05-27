@@ -77,23 +77,25 @@ class BluetoothClient(object):
                     #message = raw_input('Send:')
                     #if not message : break
                     client_socket.send(client_info)
-                    s = client_socket.recv(1024).decode('utf-8')
-                    print('Received', s)
+                    #s = client_socket.recv(1024).decode('utf-8')
+                    #print('Received', s)
                     #self.handleMessage(s)
-                    self.client_socket.close()
+                    client_socket.close()
+                    print("Client going down")
                     break
+                break
 
             except IOError:
                 pass
 
             except KeyboardInterrupt:
 
-                if self.client_socket is not None:
-                    self.client_socket.close()
+                if client_socket is not None:
+                    client_socket.close()
 
                 #server_sock.close()
 
-                print("Server going down")
+                print("Client going down")
                 break
 
     def send(self, message):

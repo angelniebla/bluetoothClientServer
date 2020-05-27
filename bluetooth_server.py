@@ -110,14 +110,15 @@ class BluetoothServer(object):
                         if self.client_sock is not None:
                             self.client_sock.close()
 
-                        server_sock.close()
+                        #server_sock.close()
 
                         print("Server going down")
                         self.change(str(client_info[0]))
-                        break
+                        #break
                     
                     elif c == '#' and len(s) > 0:
                         #self.handleMessage(s)
+                        print(s)
                         self.data[s]="111"
                         s = ''
                         if self.client_sock is not None:
@@ -130,6 +131,7 @@ class BluetoothServer(object):
                         #break
                     elif c == '$' and len(s) > 0:
                         #test = dict(self.data)
+                        print(list(self.data))
                         for key in list(self.data):
                             if key == str(client_info[0]):
                                 self.handleMessage(self.data[key])

@@ -105,7 +105,9 @@ class BluetoothServer(object):
                     
 
                     if c == '.' and len(s) > 0:
-                        self.handleRedirect(s)
+                        
+                        self.change(str(client_info[0]))
+                        
                         s = ''
                         if self.client_sock is not None:
                             self.client_sock.close()
@@ -113,7 +115,6 @@ class BluetoothServer(object):
                         #server_sock.close()
 
                         print("Server going down")
-                        self.change(str(client_info[0]))
                         #break
                     
                     elif c == '#' and len(s) > 0:

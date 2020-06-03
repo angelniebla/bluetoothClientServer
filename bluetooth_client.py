@@ -76,10 +76,12 @@ class BluetoothClient(object):
                     
                     #message = raw_input('Send:')
                     #if not message : break
-                    client_socket.send(client_info)
+                    #self.send(client_info)
+                    client_socket.send((client_info+'#').encode('utf-8'))
                     #s = client_socket.recv(1024).decode('utf-8')
                     #print('Received', s)
                     #self.handleMessage(s)
+                    self.handleRedirect()
                     client_socket.close()
                     print("Client going down")
                     break
@@ -102,5 +104,7 @@ class BluetoothClient(object):
         '''
         Appends a period to your message and sends the message back to the client.
         '''
+        print("SENDING " + message)
         self.client_sock.send((message+'#').encode('utf-8'))
-        print(message)
+        
+

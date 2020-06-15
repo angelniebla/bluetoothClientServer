@@ -106,7 +106,8 @@ class BluetoothServer(object):
 
                     if c == '.' and len(s) > 0:
                         
-                        self.change(str(client_info[0]))
+                        client_addr = self.change(str(client_info[0]))
+                        self.handleMessage(client_addr)
                         
                         s = ''
                         if self.client_sock is not None:
@@ -116,6 +117,8 @@ class BluetoothServer(object):
 
                         print("Server going down")
                         #break
+                        
+                        
                     
                     elif c == '#' and len(s) > 0:
                         #self.handleMessage(s)
@@ -168,4 +171,4 @@ class BluetoothServer(object):
         Appends a period to your message and sends the message back to the client.
         '''
         self.client_sock.send((message+'.').encode('utf-8'))
-        print(message)
+        #print(message)

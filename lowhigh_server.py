@@ -30,7 +30,10 @@ class LowHighServer(BluetoothServer):
     def change(self, client_info):
         print('CAMBIANDO A MODO CLIENTE')
         BluetoothClient.__init__(self)
-        BluetoothClient.start(self, client_info)
+        client_addr = BluetoothClient.start(self, client_info)
+        if client_addr is None:
+                return "0"
+        return client_addr
 
 if __name__ == '__main__':
 

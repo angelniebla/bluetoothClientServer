@@ -38,8 +38,16 @@ class BluetoothClient(object):
         # Create a new server socket using RFCOMM protocol
         client_socket = bt.BluetoothSocket(bt.RFCOMM)
         
-        client_socket.connect(("D4:3B:04:76:E7:55", 1))
+        #client_socket.settimeout(100.0)
         
+        client_addr = "D4:3B:04:76:E7:55"
+        
+        try:
+        
+            client_socket.connect((client_addr, 1))
+            
+        except bt.btcommon.BluetoothError:
+            return None
         
 
 
@@ -81,10 +89,12 @@ class BluetoothClient(object):
                     #s = client_socket.recv(1024).decode('utf-8')
                     #print('Received', s)
                     #self.handleMessage(s)
-                    self.handleRedirect()
+                    #self.handleRedirect()
                     client_socket.close()
                     print("Client going down")
-                    break
+                    
+                    return client_addr
+                
                 break
 
             except IOError:
